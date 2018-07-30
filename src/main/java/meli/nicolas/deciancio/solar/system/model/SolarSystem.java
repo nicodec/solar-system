@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javafx.geometry.Point2D;
-import meli.nicolas.deciancio.solar.system.ForecastReport;
+import meli.nicolas.deciancio.solar.system.report.ForecastReport;
 import meli.nicolas.deciancio.solar.system.dao.ForecastDao;
 import meli.nicolas.deciancio.solar.system.model.entity.Forecast;
 import meli.nicolas.deciancio.solar.system.strategy.ForecastEventStrategyManager;
@@ -49,12 +49,21 @@ public class SolarSystem {
     private Long actualDay = 0L;
     private Point2D sunPosition = new Point2D(0.0, 0.0);
 
+    /**
+     * Initializes the instance on startup and generates the initial Forecast Report for the years
+     * set as environment property as user requirement
+     */
     @PostConstruct
     public void init() {
         this.planets = newArrayList(getFerengi(), getBetazoid(), getVulcan());
         this.getForecast(this.initYears);
     }
 
+    /**
+     * Performs a forecast over the current solar system for the number of {@param years} defined as parameter
+     * for this method
+     * @param years number of years for forecast to perform
+     */
     public void getForecast(int years) {
         LOGGER.info("Starting forecast for {} years", years);
         final int totalDays = years * DAYS_YEAR;
@@ -63,9 +72,14 @@ public class SolarSystem {
             this.forecastReport.addToReport(forecastInfo);
             persistForecast(forecastInfo);
         }
+        LOGGER.info("Forecast ready to send");
         this.forecastReport.sendReport();
     }
 
+    /**
+     * Saves the {@link ForecastInfo} introduced in the Database calling {@link ForecastDao} save method
+     * @param forecastInfo info to save
+     */
     private void persistForecast(ForecastInfo forecastInfo) {
         final Forecast forecast = new Forecast();
         forecast.setDay(forecastInfo.getDay());
@@ -73,6 +87,11 @@ public class SolarSystem {
         dao.save(forecast);
     }
 
+    /**
+     * Performs a single day transition of forecast and returns the information collected for the solar system
+     * in current transition on time
+     * @return {@link ForecastInfo} collected
+     */
     public ForecastInfo oneDayTransitionForecast() {
         final ForecastInfo info = forecastEventManager.getForecastInfoForPlanets(planets, sunPosition);
         info.setDay(actualDay);

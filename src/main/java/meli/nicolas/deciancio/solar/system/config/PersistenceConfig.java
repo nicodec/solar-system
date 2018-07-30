@@ -109,6 +109,7 @@ public class PersistenceConfig implements DisposableBean {
         hibernateProperties.setProperty("hibernate.connection.zeroDateTimeBehavior", "convertToNull");
         hibernateProperties.setProperty("hibernate.connection.transformedBitIsBoolean", "true");
         hibernateProperties.setProperty("hibernate.flushMode", "ALWAYS");
+        hibernateProperties.setProperty("hibernate.jdbc.batch_size", "800");
 
         return hibernateProperties;
     }
