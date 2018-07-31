@@ -41,5 +41,12 @@ public class ForecastDao {
         session.save(entity);
         return Optional.ofNullable(entity);
     }
+
+    public void saveAll(Iterable<Forecast> entities) {
+        final Session session = this.sessionFactory.getCurrentSession();
+        for (final Forecast entity : entities) {
+            session.save(entity);
+        }
+    }
 }
 

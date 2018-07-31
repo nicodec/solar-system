@@ -1,13 +1,17 @@
 package meli.nicolas.deciancio.solar.system.model;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Lists.newLinkedList;
 import static meli.nicolas.deciancio.solar.system.factory.PlanteFactory.getBetazoid;
 import static meli.nicolas.deciancio.solar.system.factory.PlanteFactory.getFerengi;
 import static meli.nicolas.deciancio.solar.system.factory.PlanteFactory.getVulcan;
 import static meli.nicolas.deciancio.solar.system.utils.CollectionUtils.safeStream;
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.slf4j.LoggerFactory.getLogger;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
@@ -19,9 +23,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javafx.geometry.Point2D;
-import meli.nicolas.deciancio.solar.system.report.ForecastReport;
 import meli.nicolas.deciancio.solar.system.dao.ForecastDao;
 import meli.nicolas.deciancio.solar.system.model.entity.Forecast;
+import meli.nicolas.deciancio.solar.system.report.ForecastReport;
 import meli.nicolas.deciancio.solar.system.strategy.ForecastEventStrategyManager;
 
 @Transactional
@@ -67,10 +71,14 @@ public class SolarSystem {
     public void getForecast(int years) {
         LOGGER.info("Starting forecast for {} years", years);
         final int totalDays = years * DAYS_YEAR;
+        final LinkedList<ForecastInfo> result = newLinkedList();
         for (int i = 0; i < totalDays; i++) {
             final ForecastInfo forecastInfo = this.oneDayTransitionForecast();
             this.forecastReport.addToReport(forecastInfo);
-            persistForecast(forecastInfo);
+            result.add(forecastInfo);
+        }
+        if (isNotEmpty(result)) {
+            persistForecast(result);
         }
         LOGGER.info("Forecast ready to send");
         this.forecastReport.sendReport();
@@ -80,11 +88,15 @@ public class SolarSystem {
      * Saves the {@link ForecastInfo} introduced in the Database calling {@link ForecastDao} save method
      * @param forecastInfo info to save
      */
-    private void persistForecast(ForecastInfo forecastInfo) {
-        final Forecast forecast = new Forecast();
-        forecast.setDay(forecastInfo.getDay());
-        forecast.setForecastEvent(forecastInfo.getForecastEvent());
-        dao.save(forecast);
+    private void persistForecast(LinkedList<ForecastInfo> forecastInfo) {
+        final List<Forecast> forecastList = safeStream(forecastInfo).map(f -> {
+            final Forecast forecast = new Forecast();
+            forecast.setDay(f.getDay());
+            forecast.setForecastEvent(f.getForecastEvent());
+            return forecast;
+        }).collect(Collectors.toList());
+
+        dao.saveAll(forecastList);
     }
 
     /**
