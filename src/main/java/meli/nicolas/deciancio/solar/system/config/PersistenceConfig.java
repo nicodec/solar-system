@@ -100,7 +100,6 @@ public class PersistenceConfig implements DisposableBean {
         hibernateProperties.setProperty("hibernate.dialect", dialect);
         hibernateProperties.setProperty("hibernate.bytecode.use_reflection_optimizer", bytecodeUseReflectionOptimizer);
 
-        Preconditions.checkArgument(!"CREATE".equalsIgnoreCase(hbm2ddlAuto) || StringUtils.containsIgnoreCase(jdbcUrl, "LOCALHOST"), "hbm2ddlAuto=CREATE allowed only for localhost environment databases");
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
         hibernateProperties.setProperty("hibernate.show_sql", showSql);
         hibernateProperties.setProperty("hibernate.format_sql", formatSql);
