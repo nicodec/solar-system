@@ -6,8 +6,6 @@
 
     <bean id="propertiesPlaceholderConfig" class="meli.nicolas.deciancio.solar.system.config.AppContextConfiguration"/>
 
-    <tx:annotation-driven transaction-manager="transactionManager"/>
-
     <context:annotation-config/>
 
     <context:component-scan base-package="meli.nicolas.deciancio.solar.system"/>

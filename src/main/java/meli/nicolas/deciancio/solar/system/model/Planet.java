@@ -28,8 +28,8 @@ public class Planet {
     }
 
     public Point2D getCartesianPosition() {
-        final Double xPos = cos(toRadians(abs(this.anglePosition))) * this.distanceFromSun;
-        final Double yPos = sin(toRadians(abs(this.anglePosition))) * this.distanceFromSun;
+        final Double xPos = cos(toRadians(this.anglePosition)) * this.distanceFromSun;
+        final Double yPos = sin(toRadians(this.anglePosition)) * this.distanceFromSun;
         return new Point2D(xPos, yPos);
     }
 

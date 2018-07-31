@@ -17,7 +17,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@ImportResource(value = "classpath*:application-context.xml")
+@ImportResource(value = "classpath*:application-context-tx.xml")
 public class PersistenceConfig implements DisposableBean {
 
     @Value("${solar.system.sql.driver_class}")
