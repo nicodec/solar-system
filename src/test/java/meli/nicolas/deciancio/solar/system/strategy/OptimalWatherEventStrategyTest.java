@@ -1,6 +1,7 @@
 package meli.nicolas.deciancio.solar.system.strategy;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static meli.nicolas.deciancio.solar.system.factory.PlanteFactory.getVulcan;
 import static meli.nicolas.deciancio.solar.system.model.ForecastEvent.OPTIMUM_WEATHER;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -65,5 +66,11 @@ public class OptimalWatherEventStrategyTest {
         assertEquals(result.getForecastEvent(), OPTIMUM_WEATHER);
         assertEquals(result.getTrianglePerimeter(), 0.0);
         assertNull(result.getDay());
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testEvaluatePrediction_Error() {
+        final List<Planet> planets = newArrayList(getVulcan(), getVulcan(), getVulcan(), getVulcan());
+        this.target.evaluatePrediction(planets, new Point2D(0.0, 0.0));
     }
 }

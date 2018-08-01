@@ -45,23 +45,31 @@ Cloudfoudry) y enviar la URL para consulta:
 
 Ej: GET → http://....../clima?dia=566 → Respuesta: {“dia”:566, “clima”:”lluvia”}
 
-# Aplicacion
+# Aplicación
 Es una web desarrollada en Java 8, Maven, Spring, Jetty, Hibernate, MySql, TestNG y Mockito.
 
-Para poder iniciar el servidor debe: 
+Para poder iniciar el servidor debe:
 - tener el puerto 9290 libre
 - contar con un servidor mysql con el esquema **solar_system** creado, la app
-al iniciar crea las tablas con sus indices y relaciones en forma automatica.
+al iniciar crea las tablas con sus índices y relaciones en forma automática.
+Nota: esto solo debe hacerse a fines practicos, para aplicaciones productivas es recomendable correr los
+scripts necesarios para levantar el esquema en forma manual.
 ## Supuestos y Consideraciones
 Para el desarrollo se consideraron los siguientes supuestos:
 - Considerando que un año se define por el periodo de tiempo que un cuerpo celeste demora en completar una vuelta
-a su estrella mas cercana y que cada planeta tiene su propia velocidad angular, se opto por tomar el periodo del 
-planeta que menor velocidad angular -> **1 año = 360 dias**.
-- Se mantuvo bajo el acomplamiento para prevenir un posible cambio en la cantidad de planetas en el sistema solar.
-- Como en el enunciado se habla de **periodos** de clima se supuso que un periodo esta formado por la prolongacion
-en el tiempo de un evento dado. 3 dias ininterrumpidos de lluvia equivalen a un 1 periodo.
-- SolarSystem se definio como un **Singleton** con el estado de los planetas dados de alta al ser inicializado,
-esto se hizo considerando una unica instancia del mismo.
-- El job de prediccion corre a partir del primer dia luego de transcurridos los 10 años requeridos por el enunciado
+a su estrella más cercana y que cada planeta tiene su propia velocidad angular, se optó por tomar el periodo del
+planeta que menor velocidad angular -> **1 año = 360 días**.
+- Se mantuvo bajo el acoplamiento para prevenir un posible cambio en la cantidad de planetas en el sistema solar.
+- Como en el enunciado se habla de **periodos** de clima se supuso que un periodo está formado por la prolongación
+en el tiempo de un evento dado. 3 días ininterrumpidos de lluvia equivale a un 1 periodo.
+- SolarSystem se definió como un **Singleton** stateful, esto se hizo considerando una única instancia de esta clase.
+- El job de predicción corre a partir del primer dia luego de transcurridos los 10 años requeridos por el enunciado
 desde las 00hs de cada dia.
+- El Log se muestra por consola y además se graba un archivo en la ruta ~/app/logs/log
 
+## Tests
+Pueden correrse los tests unitarios dando run al archivo **_meli/src/test/resources/unitTestsSuit.xml_**
+
+# Empacar
+Se utilizó **_maven-shade-plugin_** para el empacado de la app. Basta correr el comando **`mvn clean package`** y se
+generará un archivo .jar en la ruta target/
