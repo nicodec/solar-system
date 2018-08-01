@@ -3,7 +3,9 @@ package meli.nicolas.deciancio.solar.system.model;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.toRadians;
+import static meli.nicolas.deciancio.solar.system.utils.DoubleUtils.equalsDouble;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.Test;
 
@@ -13,7 +15,14 @@ import javafx.geometry.Point2D;
 public class PlanetTest {
 
     public void testDistance() {
+        final Planet planet1 = new Planet(9.0, 0.0, 1000.0);
+        final Planet planet2 = new Planet(9.0, 90.0, 1000.0);
 
+        final Double expected = new Point2D(0.0, 1000.0).distance(new Point2D(1000.0, 0.0));
+
+        final Double result = planet1.distance(planet2);
+
+        assertTrue(equalsDouble(result, expected));
     }
 
     public void testMove() {
@@ -25,5 +34,6 @@ public class PlanetTest {
 
         target.move();
         assertEquals(target.getCartesianPosition() , expected);
+        assertEquals(target.getAnglePosition() , -1.0);
     }
 }

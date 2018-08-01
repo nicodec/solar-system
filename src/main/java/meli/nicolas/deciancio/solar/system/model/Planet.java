@@ -44,4 +44,16 @@ public class Planet {
             }
         }
     }
+
+    public Double getAnglePosition() {
+        return anglePosition;
+    }
+
+    public void setAnglePosition(Double anglePosition) {
+        this.anglePosition = anglePosition;
+    }
+
+    public Double getDistanceFromSun() {
+        return distanceFromSun;
+    }
 }

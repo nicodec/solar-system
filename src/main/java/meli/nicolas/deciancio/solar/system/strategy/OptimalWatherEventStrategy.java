@@ -18,7 +18,7 @@ public class OptimalWatherEventStrategy implements ForecastEventStrategy {
 
     @Override
     public boolean evaluatePrediction(List<Planet> planets, Point2D sunPosition) {
-        checkArgument(isNotEmpty(planets) && planets.size() == 3, "");
+        checkArgument(isNotEmpty(planets) && planets.size() == 3, "Requires 3 planets");
         final Point2D planet1 = planets.get(0).getCartesianPosition();
         final Point2D planet2 = planets.get(1).getCartesianPosition();
         final Point2D planet3 = planets.get(2).getCartesianPosition();

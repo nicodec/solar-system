@@ -65,4 +65,3 @@ esto se hizo considerando una unica instancia del mismo.
 - El job de prediccion corre a partir del primer dia luego de transcurridos los 10 años requeridos por el enunciado
 desde las 00hs de cada dia.
 
-prueba en heroku
