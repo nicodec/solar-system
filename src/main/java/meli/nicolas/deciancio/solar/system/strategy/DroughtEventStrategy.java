@@ -16,6 +16,12 @@ import meli.nicolas.deciancio.solar.system.model.Planet;
 @Component
 public class DroughtEventStrategy implements ForecastEventStrategy {
 
+    /**
+     * Evaluates the position of the planets. If all planets are aligned with the sun it means that it's a Drought day
+     * @param planets
+     * @param sunPosition
+     * @return returns true if drought day
+     */
     @Override
     public boolean evaluatePrediction(List<Planet> planets, Point2D sunPosition) {
         checkArgument(isNotEmpty(planets) && planets.size() == 3, "Requires 3 planets");

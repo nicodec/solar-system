@@ -19,6 +19,12 @@ import meli.nicolas.deciancio.solar.system.model.Planet;
 @Component
 public class RainyEventStrategy implements ForecastEventStrategy {
 
+    /**
+     * Evaluates the position of the planets. If the planets form a triangle and the sun is inside of it means that it's a Rainy day
+     * @param planets
+     * @param sunPosition
+     * @return returns true if rainy day
+     */
     @Override
     public boolean evaluatePrediction(List<Planet> planets, Point2D sunPosition) {
         checkArgument(isNotEmpty(planets) && planets.size() == 3, "Requires 3 planets");

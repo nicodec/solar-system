@@ -16,6 +16,12 @@ import meli.nicolas.deciancio.solar.system.model.Planet;
 @Component
 public class OptimalWatherEventStrategy implements ForecastEventStrategy {
 
+    /**
+     * Evaluates the position of the planets. If all planets are aligned but not with the sun it means that it's an Optimal Weather day
+     * @param planets
+     * @param sunPosition
+     * @return returns true if optimal day
+     */
     @Override
     public boolean evaluatePrediction(List<Planet> planets, Point2D sunPosition) {
         checkArgument(isNotEmpty(planets) && planets.size() == 3, "Requires 3 planets");

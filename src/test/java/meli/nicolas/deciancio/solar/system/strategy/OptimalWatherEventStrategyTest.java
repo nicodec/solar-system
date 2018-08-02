@@ -1,7 +1,7 @@
 package meli.nicolas.deciancio.solar.system.strategy;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static meli.nicolas.deciancio.solar.system.factory.PlanteFactory.getVulcan;
+import static meli.nicolas.deciancio.solar.system.factory.PlanetFactory.getVulcan;
 import static meli.nicolas.deciancio.solar.system.model.ForecastEvent.OPTIMUM_WEATHER;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;

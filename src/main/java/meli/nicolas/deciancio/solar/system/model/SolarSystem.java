@@ -2,9 +2,9 @@ package meli.nicolas.deciancio.solar.system.model;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Lists.newLinkedList;
-import static meli.nicolas.deciancio.solar.system.factory.PlanteFactory.getBetazoid;
-import static meli.nicolas.deciancio.solar.system.factory.PlanteFactory.getFerengi;
-import static meli.nicolas.deciancio.solar.system.factory.PlanteFactory.getVulcan;
+import static meli.nicolas.deciancio.solar.system.factory.PlanetFactory.getBetazoid;
+import static meli.nicolas.deciancio.solar.system.factory.PlanetFactory.getFerengi;
+import static meli.nicolas.deciancio.solar.system.factory.PlanetFactory.getVulcan;
 import static meli.nicolas.deciancio.solar.system.utils.CollectionUtils.safeStream;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -101,7 +101,7 @@ public class SolarSystem {
 
     /**
      * Performs a single day transition of forecast and returns the information collected for the solar system
-     * in current transition on time
+     * in current transition moment
      * @return {@link ForecastInfo} collected
      */
     public ForecastInfo oneDayTransitionForecast() {

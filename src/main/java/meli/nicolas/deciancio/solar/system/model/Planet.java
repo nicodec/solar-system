@@ -23,16 +23,30 @@ public class Planet {
         return angularSpeed;
     }
 
+    /**
+     *Returns the euclidean distance between this and other planet
+     * @param planet other planet
+     * @return distance
+     */
     public Double distance(Planet planet) {
         return this.getCartesianPosition().distance(planet.getCartesianPosition());
     }
 
+    /**
+     * Returns the position of the planet expressed as cartesian coordinates.
+     *
+     * x = cos({@link #anglePosition}) * {@link #distanceFromSun}
+     * @return position represented as cartesian coordinates
+     */
     public Point2D getCartesianPosition() {
         final Double xPos = cos(toRadians(this.anglePosition)) * this.distanceFromSun;
         final Double yPos = sin(toRadians(this.anglePosition)) * this.distanceFromSun;
         return new Point2D(xPos, yPos);
     }
 
+    /**
+     * Move this planet {@link #anglePosition} to the next position the number of units represented by {@link #angularSpeed}.
+     */
     public void move() {
         this.anglePosition = this.anglePosition + this.angularSpeed;
         // esto lo hago porque al pasar los 360 se introduce un minimo error en decimales al calcular las coordenadas cartesianas

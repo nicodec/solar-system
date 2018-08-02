@@ -26,6 +26,9 @@ public class ForecastJob {
     @Autowired
     private ForecastDao forecastDao;
 
+    /**
+     * Runs a one day transition on the solar system to get a new forecast and save the output in the data base
+     */
     @Scheduled( cron = "${solar.system.forecast-job.cron}")
     public void execute() {
         if (this.enabled) {

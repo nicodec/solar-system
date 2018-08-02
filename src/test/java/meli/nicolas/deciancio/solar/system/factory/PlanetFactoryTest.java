@@ -1,8 +1,8 @@
 package meli.nicolas.deciancio.solar.system.factory;
 
-import static meli.nicolas.deciancio.solar.system.factory.PlanteFactory.getBetazoid;
-import static meli.nicolas.deciancio.solar.system.factory.PlanteFactory.getFerengi;
-import static meli.nicolas.deciancio.solar.system.factory.PlanteFactory.getVulcan;
+import static meli.nicolas.deciancio.solar.system.factory.PlanetFactory.getBetazoid;
+import static meli.nicolas.deciancio.solar.system.factory.PlanetFactory.getFerengi;
+import static meli.nicolas.deciancio.solar.system.factory.PlanetFactory.getVulcan;
 import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import meli.nicolas.deciancio.solar.system.model.Planet;
 
 @Test
-public class PlanteFactoryTest {
+public class PlanetFactoryTest {
 
     public void testGetFerengi() {
         final Planet ferengi = getFerengi();

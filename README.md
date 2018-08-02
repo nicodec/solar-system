@@ -66,6 +66,8 @@ en el tiempo de un evento dado. 3 días ininterrumpidos de lluvia equivale a un 
 - El job de predicción corre a partir del primer dia luego de transcurridos los 10 años requeridos por el enunciado
 desde las 00hs de cada dia.
 - El Log se muestra por consola y además se graba un archivo en la ruta ~/app/logs/log
+- En el caso que los planetas forman un triangulo pero el sol no esta dentro del mismo se supuso que en ese dia no
+ocurre ningun evento meteorologico
 
 ## Tests
 Pueden correrse los tests unitarios dando run al archivo **_meli/src/test/resources/unitTestsSuit.xml_**

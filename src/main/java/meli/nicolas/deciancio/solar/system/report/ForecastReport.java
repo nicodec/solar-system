@@ -38,6 +38,12 @@ public class ForecastReport {
         this.daysPeriod = 0L;
     }
 
+    /**
+     * Adds {@param info} to the report. It stores the last {@link #lastForecast} so, if next forecast event is different to the one stored,
+     * it increases the count of periods of that event. If <code>info.forecastEvent</code> is {@link ForecastEvent#RAINY} and the triangle
+     * perimeter defined between the three planets is greater than all the previous events it's considered the max intensity rain day.
+     * @param info
+     */
     public void addToReport(ForecastInfo info) {
         if (isNull(info)) {
             return;
@@ -55,6 +61,9 @@ public class ForecastReport {
         this.daysPeriod++;
     }
 
+    /**
+     * Prints the report based on previous collected info
+     */
     public void sendReport() {
         LOGGER.info("Reporte para el periodo de {} dias.", this.daysPeriod);
         LOGGER.info("Cantidad de periodos de sequia: {}", this.eventPeriod.getOrDefault(DROUGHT, 0L));
